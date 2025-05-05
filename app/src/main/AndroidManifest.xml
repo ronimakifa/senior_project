@@ -2,7 +2,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
+        android:name=".SeniorProjectApplication"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -12,6 +16,24 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SeniorProject"
         tools:targetApi="31">
+        <activity
+            android:name=".guide"
+            android:exported="false" />
+
+        <receiver
+            android:name=".MyReceiver"
+            android:enabled="true"
+            android:exported="true" />
+
+        <activity
+            android:name=".add_alarm"
+            android:exported="false" />
+        <activity
+            android:name=".add_plant"
+            android:exported="false" />
+        <activity
+            android:name=".my_plants"
+            android:exported="false" />
         <activity
             android:name=".home_screen"
             android:exported="false" />

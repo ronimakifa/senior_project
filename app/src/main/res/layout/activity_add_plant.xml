@@ -5,72 +5,66 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".home_screen">
+    tools:context=".add_plant">
 
-    <Button
-        android:id="@+id/alarm_id"
+    <EditText
+        android:id="@+id/nameEditText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="create alarm"
-        android:onClick="gotoCreateAlarm"
+        android:hint="Plant Name"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.487"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.768"
-        android:backgroundTint="#67AE6E"/>
+        app:layout_constraintVertical_bias="0.172" />
 
-    <Button
-        android:id="@+id/my_garden_id"
+    <EditText
+        android:id="@+id/wateringFrequencyEditText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="my garden"
-        android:onClick="goto_MYGARDEN"
+        android:hint="Watering Frequency"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.479"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.521"
-        android:backgroundTint="#67AE6E"/>
+        app:layout_constraintVertical_bias="0.386" />
 
-    <Button
-        android:id="@+id/plant_guide_id"
+    <EditText
+        android:id="@+id/soilTypeEditText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="plant guide"
-        android:onClick="goto_guide"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.472"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.645"
-        android:backgroundTint="#67AE6E"/>
-
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="hello username!"
+        android:hint="Soil Type"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.244" />
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/logout_id"
-        android:layout_width="109dp"
-        android:layout_height="45dp"
-        android:text="log out"
+    <EditText
+        android:id="@+id/pictureEditText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Picture URL"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.049"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.023"
+        app:layout_constraintVertical_bias="0.281" />
+
+    <Button
+        android:id="@+id/addButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Add Plant"
+        android:onClick="onClick"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.516"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.651"
         android:backgroundTint="#328E6E"/>
+    
+
 </androidx.constraintlayout.widget.ConstraintLayout>
