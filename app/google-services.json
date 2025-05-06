@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "1002564941967",
+    "firebase_url": "https://senior-project-46729-default-rtdb.firebaseio.com",
+    "project_id": "senior-project-46729",
+    "storage_bucket": "senior-project-46729.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1002564941967:android:0d49b83e57f4beace8d8fa",
+        "android_client_info": {
+          "package_name": "com.example.seniorproject"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBNn6U5MKjwY-Vxg-NVNQCN6LNOFafwAaA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
