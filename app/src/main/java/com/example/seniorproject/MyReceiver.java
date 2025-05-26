@@ -9,24 +9,36 @@ import androidx.annotation.RequiresPermission;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 
+/**
+ * BroadcastReceiver that handles alarm broadcasts and displays a notification to remind the user to water their plants.
+ *
+ * <p>This receiver is triggered by the AlarmManager and creates a notification using NotificationCompat.</p>
+ *
+ * @author Roni Zuckerman
+ */
 public class MyReceiver extends BroadcastReceiver {
 
+    /**
+     * Called when the BroadcastReceiver receives an Intent broadcast.
+     * Builds and displays a notification reminding the user to water their plants.
+     *
+     * @param context The Context in which the receiver is running.
+     * @param intent The Intent being received.
+     */
     @RequiresPermission(Manifest.permission.POST_NOTIFICATIONS)
     @Override
     public void onReceive(Context context, Intent intent) {
-        // TODO: This method is called when the BroadcastReceiver is receiving
-        // an Intent broadcast.
-            NotificationCompat.Builder builder = new NotificationCompat.Builder(context, "notifyLemubit")
-                    .setSmallIcon(R.drawable.ic_launcher_background)
-                    .setContentTitle("Reminder")
-                    .setContentText("Water your plants!")
-                    .setPriority(NotificationCompat.PRIORITY_HIGH);
-                    builder.setAutoCancel(true);
-                    builder.setDefaults(NotificationCompat.DEFAULT_ALL);
+        // Build the notification with title, text, and icon
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(context, "notifyLemubit")
+                .setSmallIcon(R.drawable.ic_launcher_background)
+                .setContentTitle("Reminder")
+                .setContentText("Water your plants!")
+                .setPriority(NotificationCompat.PRIORITY_HIGH)
+                .setAutoCancel(true)
+                .setDefaults(NotificationCompat.DEFAULT_ALL);
 
-                    NotificationManagerCompat notificationManager = NotificationManagerCompat.from(context);
-                    notificationManager.notify(200, builder.build());
-
-
-        }
+        // Get the NotificationManager and show the notification
+        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(context);
+        notificationManager.notify(200, builder.build());
     }
+}

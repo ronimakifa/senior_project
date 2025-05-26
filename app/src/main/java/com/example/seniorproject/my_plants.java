@@ -1,3 +1,10 @@
+/**
+ * Activity for displaying and managing the user's list of plants.
+ * Loads plant data from Firestore, displays it in a RecyclerView, and allows adding new plants.
+ * Handles the result from the add plant activity and updates Firestore accordingly.
+ *
+ * @author Roni Zuckerman
+ */
 package com.example.seniorproject;
 
 import android.content.Intent;
@@ -20,19 +27,31 @@ import java.util.concurrent.CompletableFuture;
 
 public class my_plants extends AppCompatActivity {
 
+    /** Request code for starting the add plant activity. */
     private static final int ADD_PLANT_REQUEST_CODE = 1;
 
+    /** RecyclerView for displaying the list of plants. */
     private RecyclerView recyclerView;
+    /** Adapter for binding plant data to the RecyclerView. */
     private plantAdapter plantAdapter;
+    /** The current user whose plants are displayed. */
     private User user;
+    /** Firestore database instance. */
     private FirebaseFirestore db;
 
+    /**
+     * Called when the activity is starting.
+     * Loads user data, initializes RecyclerView, and sets up the plant list.
+     *
+     * @param savedInstanceState If the activity is being re-initialized after previously being shut down,
+     *                          this Bundle contains the data it most recently supplied.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_plants);
 
-        // Initialize the user (replace "userId" with the actual user ID)
+        // Load user data asynchronously
         CompletableFuture<User> future = (new User()).loadData(FirebaseAuth.getInstance().getUid());
 
         // Initialize Firebase Firestore
@@ -42,7 +61,7 @@ public class my_plants extends AppCompatActivity {
         recyclerView = findViewById(R.id.recyclerViewPlants);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        // Load plants and set adapter
+        // Load plants and set adapter when user data is ready
         future.thenAccept(user -> {
             this.user = user;
             loadPlants();
@@ -52,19 +71,27 @@ public class my_plants extends AppCompatActivity {
         });
     }
 
+    /**
+     * Loads the user's plants into the RecyclerView.
+     * Initializes the adapter with the user's plant list.
+     */
     private void loadPlants() {
-        if ( user.getPlants() == null) {
+        if (user.getPlants() == null) {
             user.plants = new ArrayList<>();
         }
-        // Assuming user.plants is already populated
         List<plant> plantList = user.getPlants();
-
-
-
         plantAdapter = new plantAdapter(this, plantList);
         recyclerView.setAdapter(plantAdapter);
     }
 
+    /**
+     * Handles the result from the add plant activity.
+     * Adds the new plant to the user's list and updates Firestore.
+     *
+     * @param requestCode The integer request code originally supplied to startActivityForResult().
+     * @param resultCode The integer result code returned by the child activity.
+     * @param data An Intent, which can return result data to the caller.
+     */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -74,7 +101,7 @@ public class my_plants extends AppCompatActivity {
                 // Add the new plant to the local list
                 user.addPlant(newPlant);
 
-                // Convert the list of plants to a list of maps
+                // Convert the list of plants to a list of maps for Firestore
                 List<Map<String, Object>> plantList = new ArrayList<>();
                 for (plant p : user.plants) {
                     Map<String, Object> plantMap = new HashMap<>();
@@ -100,7 +127,11 @@ public class my_plants extends AppCompatActivity {
         }
     }
 
-    // Method to start add_plant activity
+    /**
+     * Starts the add plant activity to allow the user to add a new plant.
+     *
+     * @param view The view that was clicked.
+     */
     public void startAddPlantActivity(View view) {
         Intent intent = new Intent(this, add_plant.class);
         startActivityForResult(intent, ADD_PLANT_REQUEST_CODE);

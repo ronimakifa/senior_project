@@ -9,34 +9,43 @@ import android.view.View;
 import android.view.ViewGroup;
 
 /**
- * A simple {@link Fragment} subclass.
- * Use the {@link fertilizing_guide#newInstance} factory method to
- * create an instance of this fragment.
+ * Fragment that provides a guide for plant fertilizing.
+ * This fragment can be instantiated with parameters and displays fertilizing-related information.
+ *
+ * <p>Use the {@link #newInstance(String, String)} factory method to create a new instance with parameters.</p>
+ *
+ * @author Roni Zuckerman
+ * @version 1.0
+ * @since 2024-06-07
  */
 public class fertilizing_guide extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+    /** Argument key for the first parameter. */
     private static final String ARG_PARAM1 = "param1";
+    /** Argument key for the second parameter. */
     private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
+    /** The first parameter for fragment initialization. */
     private String mParam1;
+    /** The second parameter for fragment initialization. */
     private String mParam2;
 
+    /**
+     * Required empty public constructor.
+     * Use {@link #newInstance(String, String)} to create an instance with parameters.
+     */
     public fertilizing_guide() {
         // Required empty public constructor
     }
 
     /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
+     * Factory method to create a new instance of this fragment using the provided parameters.
      *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
+     * @param param1 The first parameter for the fragment.
+     * @param param2 The second parameter for the fragment.
      * @return A new instance of fragment fertilizing_guide.
+     * @author Roni Zuckerman
      */
-    // TODO: Rename and change types and number of parameters
     public static fertilizing_guide newInstance(String param1, String param2) {
         fertilizing_guide fragment = new fertilizing_guide();
         Bundle args = new Bundle();
@@ -46,6 +55,13 @@ public class fertilizing_guide extends Fragment {
         return fragment;
     }
 
+    /**
+     * Called to do initial creation of the fragment.
+     * Retrieves parameters from the arguments bundle if available.
+     *
+     * @param savedInstanceState If the fragment is being re-created from a previous saved state, this is the state.
+     * @author Roni Zuckerman
+     */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,6 +71,16 @@ public class fertilizing_guide extends Fragment {
         }
     }
 
+    /**
+     * Called to have the fragment instantiate its user interface view.
+     * Inflates the layout for this fragment.
+     *
+     * @param inflater The LayoutInflater object that can be used to inflate any views in the fragment.
+     * @param container If non-null, this is the parent view that the fragment's UI should be attached to.
+     * @param savedInstanceState If non-null, this fragment is being re-constructed from a previous saved state as given here.
+     * @return The View for the fragment's UI, or null.
+     * @author Roni Zuckerman
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

@@ -14,8 +14,21 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.google.firebase.auth.FirebaseAuth;
 
+/**
+ * Handles the user sign-up process, including UI input and Firebase authentication.
+ * On successful registration, saves user data and navigates to the home screen.
+ *
+ * @author Roni Zuckerman
+ */
 public class sign_up_screen extends AppCompatActivity {
 
+    /**
+     * Called when the activity is starting.
+     * Sets up the UI and handles window insets for edge-to-edge display.
+     *
+     * @param savedInstanceState If the activity is being re-initialized after previously being shut down,
+     *                          this Bundle contains the data it most recently supplied.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,6 +41,12 @@ public class sign_up_screen extends AppCompatActivity {
         });
     }
 
+    /**
+     * Handles the sign-up button click event.
+     * Collects user input from EditText fields and initiates the sign-up process.
+     *
+     * @param view The view that was clicked.
+     */
     public void onSignupClick(View view) {
         EditText usernameEditText = findViewById(R.id.editTextUsername);
         EditText emailEditText = findViewById(R.id.editTextTextEmailAddress);
@@ -40,21 +59,30 @@ public class sign_up_screen extends AppCompatActivity {
         signUp(username, email, password);
     }
 
+    /**
+     * Registers a new user with Firebase Authentication and saves user data to Firestore.
+     * On success, navigates to the home screen. On failure, shows a Toast message.
+     *
+     * @param username The username entered by the user.
+     * @param email The email address entered by the user.
+     * @param password The password entered by the user.
+     */
     public void signUp(String username, String email, String password){
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
         mAuth.createUserWithEmailAndPassword(email, password)
-            .addOnCompleteListener(this, task -> {
-                if (task.isSuccessful()) {
-                    User user = new User(mAuth.getCurrentUser().getUid(), username, password, email);
-                    user.saveData();
-                    Intent intent = new Intent(this, home_screen.class);
-                    intent.putExtra("username", username);
-                    startActivity(intent);
-
-
-                } else {
-                     Toast.makeText(this, "Authentication failed.", Toast.LENGTH_SHORT).show();
-                }
-            });
+                .addOnCompleteListener(this, task -> {
+                    if (task.isSuccessful()) {
+                        // Create and save the user in Firestore
+                        User user = new User(mAuth.getCurrentUser().getUid(), username, password, email);
+                        user.saveData();
+                        // Navigate to home screen
+                        Intent intent = new Intent(this, home_screen.class);
+                        intent.putExtra("username", username);
+                        startActivity(intent);
+                    } else {
+                        // Show error message if authentication fails
+                        Toast.makeText(this, "Authentication failed.", Toast.LENGTH_SHORT).show();
+                    }
+                });
     }
 }
