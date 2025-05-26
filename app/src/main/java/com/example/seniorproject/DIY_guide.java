@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebView;
 
 /**
  * Fragment that provides a DIY (Do It Yourself) guide for plant care.
@@ -73,18 +74,24 @@ public class DIY_guide extends Fragment {
 
     /**
      * Called to have the fragment instantiate its user interface view.
-     * Inflates the layout for this fragment.
+     * Inflates the layout for this fragment and loads a YouTube video in a WebView.
      *
      * @param inflater The LayoutInflater object that can be used to inflate any views in the fragment.
      * @param container If non-null, this is the parent view that the fragment's UI should be attached to.
      * @param savedInstanceState If non-null, this fragment is being re-constructed from a previous saved state as given here.
      * @return The View for the fragment's UI, or null.
-     * @author Roni Zuckerman
      */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_d_i_y_guide, container, false);
+        View view = inflater.inflate(R.layout.fragment_d_i_y_guide, container, false);
+
+        WebView webView = view.findViewById(R.id.youtubeWebView);
+        webView.getSettings().setJavaScriptEnabled(true);
+        String videoId = "vlQ4VGCOc4g";
+        String html = "<iframe width=\"100%\" height=\"100%\" src=\"https://www.youtube.com/embed/" + videoId + "\" frameborder=\"0\" allowfullscreen></iframe>";
+        webView.loadData(html, "text/html", "utf-8");
+
+        return view;
     }
 }
