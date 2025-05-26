@@ -19,6 +19,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.seniorproject.databinding.ActivityMainBinding;
+import com.google.android.material.datepicker.MaterialDatePicker;
 import com.google.android.material.timepicker.MaterialTimePicker;
 import com.google.android.material.timepicker.TimeFormat;
 
@@ -29,6 +30,10 @@ public class add_alarm extends AppCompatActivity {
     Button SetAlarm;
     Button cancelAlarm;
     TextView timeTextView;
+    TextView dateTextView;
+
+    Calendar calendar = Calendar.getInstance();
+
 
 
     private MaterialTimePicker picker;
@@ -45,9 +50,11 @@ public class add_alarm extends AppCompatActivity {
         cancelAlarm = findViewById(R.id.cancel_alarm_id3);
         selectTime = findViewById(R.id.selectTime);
 
+
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_add_alarm);
         timeTextView = (TextView) findViewById(R.id.time_id);
+        dateTextView = (TextView) findViewById(R.id.date_id);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
@@ -94,7 +101,6 @@ public class add_alarm extends AppCompatActivity {
             }else{
                      timeTextView.setText(String.format("%02d:%02d AM", picker.getHour(), picker.getMinute()));
                  }
-                Calendar calendar = Calendar.getInstance();
                 calendar.set(Calendar.HOUR_OF_DAY, picker.getHour());
                 calendar.set(Calendar.MINUTE, picker.getMinute());
                 calendar.set(Calendar.SECOND, 0);
@@ -103,6 +109,27 @@ public class add_alarm extends AppCompatActivity {
 
         });
     }
+
+    private void showDatePicker() {
+        MaterialDatePicker<Long> datePicker = MaterialDatePicker.Builder.datePicker()
+                .setTitleText("Select Alarm Date")
+                .setSelection(MaterialDatePicker.todayInUtcMilliseconds())
+                .build();
+        datePicker.show(getSupportFragmentManager(), "notifyLemubitDate");
+        datePicker.addOnPositiveButtonClickListener(selection -> {
+            Calendar calendar = Calendar.getInstance();
+            int hour = calendar.get(Calendar.HOUR_OF_DAY);
+            int minute = calendar.get(Calendar.MINUTE);
+            calendar.setTimeInMillis(selection);
+            int year = calendar.get(Calendar.YEAR);
+            int month = calendar.get(Calendar.MONTH) + 1; // Months are 0-based
+            int day = calendar.get(Calendar.DAY_OF_MONTH);
+            calendar.set(calendar.HOUR, hour);
+            calendar.set(calendar.MINUTE, minute);
+            dateTextView.setText(String.format("%02d/%02d/%04d", day, month, year));
+        });
+    }
+
 
     public void setAlarm(View view) {
         setAlarnBtn();
@@ -114,7 +141,7 @@ public class add_alarm extends AppCompatActivity {
         alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
         Intent intent = new Intent(this, MyReceiver.class);
         pendingIntent = PendingIntent.getBroadcast(this, 0, intent, PendingIntent.FLAG_IMMUTABLE);
-        alarmManager.setInexactRepeating(alarmManager.RTC_WAKEUP, Calendar.getInstance().getTimeInMillis(), alarmManager.INTERVAL_DAY, pendingIntent);
+        alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pendingIntent);
         Toast.makeText(this, "Alarm is set", Toast.LENGTH_SHORT).show();
     }
 
@@ -128,5 +155,9 @@ public class add_alarm extends AppCompatActivity {
         alarmManager.cancel(pendingIntent);
         pendingIntent.cancel();
         Toast.makeText(this,"Alarm is canceled", Toast.LENGTH_SHORT).show();
+    }
+
+    public void setDate(View view) {
+        showDatePicker();
     }
 };
