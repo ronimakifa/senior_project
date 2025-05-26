@@ -6,11 +6,15 @@
     tools:context=".illness_guide">
 
     <!-- TODO: Update blank fragment layout -->
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:text="plant disease guide"
-        android:textSize="24dp"
-        android:textAlignment="center"/>
+        android:textAlignment="center"
+        android:textSize="24dp" />
+
+
+
 
 </FrameLayout>
