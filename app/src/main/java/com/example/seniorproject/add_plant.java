@@ -81,7 +81,6 @@ public class add_plant extends AppCompatActivity {
         plant newPlant = new plant(name, wateringFrequency, soilType, picture);
 
         // Add the new plant to the user's collection
-        user.addPlant(newPlant);
 
         // Pass the new plant data back to the plants activity
         Intent resultIntent = new Intent();
