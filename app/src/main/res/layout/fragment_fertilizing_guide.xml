@@ -16,17 +16,10 @@
         android:textSize="24sp"
         android:layout_marginBottom="16dp"/>
 
-    <ImageView
-        android:layout_width="300dp"
-        android:layout_height="300dp"
-        android:src="@drawable/fertilizer1"
-        android:contentDescription="Fertilizer Example 1"
-        android:layout_marginBottom="16dp"/>
-
-    <ImageView
-        android:layout_width="300dp"
-        android:layout_height="300dp"
-        android:src="@drawable/fertilizer2"
-        android:contentDescription="Fertilizer Example 2"/>
+    <WebView
+        android:id="@+id/youtubeWebView1"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_marginTop="16dp" />
 
 </LinearLayout>

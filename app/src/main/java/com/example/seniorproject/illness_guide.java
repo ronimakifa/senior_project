@@ -3,10 +3,15 @@ package com.example.seniorproject;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Fragment that provides a guide for plant illnesses.
@@ -62,6 +67,7 @@ public class illness_guide extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
@@ -79,7 +85,14 @@ public class illness_guide extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_illness_guide, container, false);
+        View view = inflater.inflate(R.layout.fragment_illness_guide, container, false);
+        RecyclerView recyclerView = view.findViewById(R.id.recyclerView);
+        List<disease> diseaseList = new ArrayList<>();
+        diseaseList.add(new disease("Powdery Mildew", "A fungal disease that appears as white powdery spots on leaves.",R.drawable.powder, "To treat powdery mildew, remove affected leaves, improve air circulation, and apply fungicides if necessary."));
+        diseaseList.add(new disease("Root Rot", "A condition caused by overwatering or poor drainage, leading to root decay.", R.drawable.rootrot, "To treat root rot, remove the plant from the pot, trim away rotten roots, and repot in fresh, well-draining soil."));
+        diseaseList.add(new disease("Leaf Spot", "A fungal or bacterial infection that causes dark spots on leaves.", R.drawable.leafspot, "To treat leaf spot, remove affected leaves, avoid overhead watering, and apply fungicides if needed."));
+        recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
+        recyclerView.setAdapter(new diseaseAdapter(requireContext(), diseaseList));
+        return view;
     }
 }

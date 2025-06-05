@@ -7,25 +7,11 @@
     android:gravity="center"
     tools:context=".illness_guide">
 
-    <TextView
-        android:layout_width="wrap_content"
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Plant Disease Guide"
-        android:textAlignment="center"
-        android:textSize="24sp"
-        android:layout_marginBottom="16dp"/>
-
-    <ImageView
-        android:layout_width="300dp"
-        android:layout_height="300dp"
-        android:src="@drawable/plant_disease1"
-        android:contentDescription="Plant Disease Example 1"
-        android:layout_marginBottom="16dp"/>
-
-    <ImageView
-        android:layout_width="300dp"
-        android:layout_height="300dp"
-        android:src="@drawable/plant_disease2"
-        android:contentDescription="Plant Disease Example 2"/>
-
+        android:id="@+id/recyclerView"
+        />
 </LinearLayout>

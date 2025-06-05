@@ -88,7 +88,7 @@ public class DIY_guide extends Fragment {
 
         WebView webView = view.findViewById(R.id.youtubeWebView);
         webView.getSettings().setJavaScriptEnabled(true);
-        String videoId = "vlQ4VGCOc4g";
+        String videoId = "Fy8kP2EYpcY";
         String html = "<iframe width=\"100%\" height=\"100%\" src=\"https://www.youtube.com/embed/" + videoId + "\" frameborder=\"0\" allowfullscreen></iframe>";
         webView.loadData(html, "text/html", "utf-8");
 

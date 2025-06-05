@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebView;
 
 /**
  * Fragment that provides a guide for plant fertilizing.
@@ -84,7 +85,12 @@ public class fertilizing_guide extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_fertilizing_guide, container, false);
+        View view = inflater.inflate(R.layout.fragment_d_i_y_guide, container, false);
+        WebView webView = view.findViewById(R.id.youtubeWebView);
+        webView.getSettings().setJavaScriptEnabled(true);
+        String videoId = "6xkLKlfwYXE";
+        String html = "<iframe width=\"100%\" height=\"100%\" src=\"https://www.youtube.com/embed/" + videoId + "\" frameborder=\"0\" allowfullscreen></iframe>";
+        webView.loadData(html, "text/html", "utf-8");
+        return view;
     }
 }
