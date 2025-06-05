@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    tools:context=".add_alarm">
+
+    <TextView
+        android:id="@+id/date_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="2023-10-13"
+        android:textSize="50dp"
+        android:layout_marginBottom="20dp" />
+
+    <TextView
+        android:id="@+id/time_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="13:25"
+        android:textSize="70dp"
+        android:layout_marginBottom="20dp" />
+
+    <Button
+        android:id="@+id/selectTime"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:text="set time"
+        android:onClick="setTime"
+        android:layout_marginBottom="20dp" />
+
+    <Button
+        android:id="@+id/selectDate"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:text="set date"
+        android:onClick="setDate"
+        android:layout_marginBottom="20dp" />
+
+    <Button
+        android:id="@+id/set_alarm_id2"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:text="set alarm"
+        android:onClick="setAlarm"
+        android:layout_marginBottom="20dp" />
+
+    <Button
+        android:id="@+id/cancel_alarm_id3"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:text="cancel alarm"
+        android:onClick="cancelAlarm" />
+
+</LinearLayout>
