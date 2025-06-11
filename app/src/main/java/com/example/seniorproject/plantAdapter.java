@@ -62,7 +62,7 @@ public class plantAdapter extends RecyclerView.Adapter<plantAdapter.PlantViewHol
      */
     @Override
     public void onBindViewHolder(@NonNull PlantViewHolder holder, int position) {
-        plant plant = plantList.get(position);
+         plant plant = plantList.get(position);
         holder.textViewPlantName.setText(plant.getName());
         holder.textViewWateringFrequency.setText(plant.getWateringFrequency());
         holder.textViewSoilType.setText(plant.getSoilType());

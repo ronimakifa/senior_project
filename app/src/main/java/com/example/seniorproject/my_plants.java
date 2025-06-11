@@ -8,6 +8,7 @@
 package com.example.seniorproject;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -18,6 +19,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -98,33 +101,42 @@ public class my_plants extends AppCompatActivity {
         if (requestCode == ADD_PLANT_REQUEST_CODE && resultCode == RESULT_OK && data != null) {
             plant newPlant = (plant) data.getSerializableExtra("newPlant");
             if (newPlant != null) {
-                // Add the new plant to the local list
-                user.addPlant(newPlant);
-
-                // Convert the list of plants to a list of maps for Firestore
-                List<Map<String, Object>> plantList = new ArrayList<>();
-                for (plant p : user.plants) {
-                    Map<String, Object> plantMap = new HashMap<>();
-                    plantMap.put("name", p.getName());
-                    plantMap.put("wateringFrequency", p.getWateringFrequency());
-                    plantMap.put("soilType", p.getSoilType());
-                    plantMap.put("picture", p.getPicture());
-                    plantList.add(plantMap);
-                }
-
-                // Save the list to Firestore
-                db.collection("Users").document(user.getuid()).set(Collections.singletonMap("plants", plantList))
-                        .addOnSuccessListener(aVoid -> {
-                            // Update the RecyclerView
-                            plantAdapter.notifyItemInserted(user.plants.size() - 1);
-                            Log.d("AddPlant", "Plants saved successfully");
-                        })
-                        .addOnFailureListener(e -> {
-                            // Handle the error
-                            Log.e("AddPlant", "Error saving plants", e);
-                        });
+                add_plant(newPlant);
             }
         }
+    }
+
+    public void  add_plant(plant newPlant) {
+        // Add the new plant to the local list
+        user.addPlant(newPlant);
+
+        // Convert the list of plants to a list of maps for Firestore
+        List<Map<String, Object>> plantList = new ArrayList<>();
+        for (plant p : user.plants) {
+            Map<String, Object> plantMap = new HashMap<>();
+            plantMap.put("name", p.getName());
+            plantMap.put("wateringFrequency", p.getWateringFrequency());
+            plantMap.put("soilType", p.getSoilType());
+            plantMap.put("picture", p.getPicture());
+            plantList.add(plantMap);
+        }
+
+        // Save the list to Firestore
+        db.collection("Users").document(user.getuid()).set(Collections.singletonMap("plants", plantList))
+                .addOnSuccessListener(aVoid -> {
+                    // Update the RecyclerView
+                    plantAdapter.notifyItemInserted(user.plants.size() - 1);
+                    Log.d("AddPlant", "Plants saved successfully");
+                })
+                .addOnFailureListener(e -> {
+                    // Handle the error
+                    Log.e("AddPlant", "Error saving plants", e);
+                });
+    }
+
+    public void addPicToFireBase(String imageUri) {
+        // This method can be used to upload the image URI to Firebase Storage if needed
+        // Currently, it is not implemented as per the original code context
     }
 
     /**
