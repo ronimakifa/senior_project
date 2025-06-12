@@ -1,5 +1,7 @@
 package com.example.seniorproject;
 
+import android.util.Log;
+
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.ArrayList;
@@ -96,6 +98,10 @@ public class User {
                 for(Map m: fetchedPlants){
                     plants.add(new plant(m));
                 }
+            }else{
+                Log.d("Firebase", "Failed to load user data: " + task.getException());
+                future.completeExceptionally(task.getException());
+                return;
             }
             future.complete(this);
         });
@@ -139,7 +145,14 @@ public class User {
         data.put("email", email);
         data.put("uid", uid);
         data.put("plants", plants);
-        db.collection(COLLECTION_NAME).document(uid).update(data);
+        db.collection(COLLECTION_NAME).document(uid).set(data).addOnCompleteListener((task) -> {
+            if (task.isSuccessful()) {
+               Log.d("Firebase","User data saved successfully.");
+            } else {
+                Log.d("Firebase","User data faild to be saved." + task.getException());
+
+            }
+        });
     }
 
     /**

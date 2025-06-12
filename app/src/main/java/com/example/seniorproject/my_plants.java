@@ -122,7 +122,7 @@ public class my_plants extends AppCompatActivity {
         }
 
         // Save the list to Firestore
-        db.collection("Users").document(user.getuid()).set(Collections.singletonMap("plants", plantList))
+        db.collection("Users").document(user.getuid()).update("plants", plantList)
                 .addOnSuccessListener(aVoid -> {
                     // Update the RecyclerView
                     plantAdapter.notifyItemInserted(user.plants.size() - 1);

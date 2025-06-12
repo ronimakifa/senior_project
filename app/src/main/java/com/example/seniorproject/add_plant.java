@@ -1,11 +1,14 @@
 package com.example.seniorproject;
 
+import static android.webkit.ConsoleMessage.MessageLevel.LOG;
+
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -53,6 +56,8 @@ public class add_plant extends AppCompatActivity {
     private Button addButton;
     private Button addImageButton;
     private final String SERVER_URL = "gs://senior-project-46729.firebasestorage.app";
+
+
 
     private static final int PERMISSION_REQUEST_CODE = 100;
     private static final int REQUEST_IMAGE_CAPTURE = 102;
@@ -151,13 +156,11 @@ public class add_plant extends AppCompatActivity {
 
 
     private void showImagePickerOptions() {
-        String[] options = {"Take Photo", "Choose from Gallery"};
+        String[] options = {"Choose from Gallery"};
         new AlertDialog.Builder(this)
                 .setTitle("Select Image")
                 .setItems(options, (dialog, which) -> {
                     if (which == 0) {
-                        dispatchTakePictureIntent(); // camera
-                    } else {
                         pickImageFromGallery(); // gallery
                     }
                 })
@@ -213,10 +216,12 @@ public class add_plant extends AppCompatActivity {
                                 urlToReturn.complete(downloadUrl);// ✅ Return the link here
                             })
                             .addOnFailureListener((Exception e) -> {;
+                                Log.d("Firebase", "Failed to get download URL: " + e.getMessage());
                                 urlToReturn.completeExceptionally(e);
                             });
                 })
                 .addOnFailureListener((Exception e) -> {;
+                    Log.d("Firebase", "Failed to add Image to storage " + e.getMessage());
                     urlToReturn.completeExceptionally(e);
                 });
     return urlToReturn;
